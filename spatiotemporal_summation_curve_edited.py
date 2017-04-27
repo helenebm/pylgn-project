@@ -25,18 +25,18 @@ for w_c in fb_weights:
     
     # create spatial kernels
          # Originaly params: A=1, a=0.62*pq.deg, B=0.85, b=1.26*pq.deg 
-    Wg_s = spl.create_dog_ft(A=1, a=0.25*pq.deg, B=0.85, b=0.5*pq.deg)      # Stimuli   -> Ganglion, (edog-paper)
+    Wg_s = spl.create_dog_ft(A=1, a=0.25*pq.deg, B=0.85, b=0.5*pq.deg)       # Stimuli   -> Ganglion, (edog-paper)
     Krg_s = spl.create_gauss_ft(A=1, a=0.1*pq.deg)                           # Gangllion -> Relay     (honda-paper)
     Kcr_s = spl.create_delta_ft()                                            # Relay     -> Cortical_cen_sur 
     Krcr_cen_s = spl.create_gauss_ft(A=1, a=(0.1)*pq.deg)                    # Cortical  -> Relay_cen
     Krcr_sur_s = spl.create_gauss_ft(A=2, a=(0.9)*pq.deg)                    # Cortical  -> Relay_sur
     
     # create temporal kernels
-    Wg_t = tpl.create_biphasic_ft(phase_duration =42.5*pq.ms, damping_factor =0.38, delay =0 *pq.ms) # param. values from Norheim, Wyller, Einevoll                                       # Stimnuli -> Ganglion
+    Wg_t = tpl.create_biphasic_ft(phase_duration =42.5*pq.ms, damping_factor =0.38, delay =0 *pq.ms)
     Krg_t = tpl.create_exp_decay_ft(1 *pq.ms, delay = 1 *pq.ms)              # Ganglion      -> Relay
     Kcr_t = tpl.create_delta_ft()                                            # Relay         -> Cortical_cen_sur
-    Krcr_cen_t = tpl.create_exp_decay_ft(1 *pq.ms, delay = 2 *pq.ms)        # Cortical_cen  -> Relay
-    Krcr_sur_t = tpl.create_exp_decay_ft(1 *pq.ms, delay = 20 *pq.ms)         # Cortical_sur  -> Relay
+    Krcr_cen_t = tpl.create_exp_decay_ft(1 *pq.ms, delay = 2 *pq.ms)         # Cortical_cen  -> Relay
+    Krcr_sur_t = tpl.create_exp_decay_ft(1 *pq.ms, delay = 20 *pq.ms)        # Cortical_sur  -> Relay
     
     # create neurons
     ganglion = network.create_ganglion_cell(kernel=(Wg_s, Wg_t))

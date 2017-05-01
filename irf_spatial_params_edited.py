@@ -29,25 +29,21 @@ for i, b_rc in enumerate(b_rcr_vec):
         Krcr_cen_s = spl.create_gauss_ft(A=1, a=(a_rc))                          # Cortical  -> Relay_cen
         Krcr_sur_s = spl.create_gauss_ft(A=2, a=(b_rc))                          # Cortical  -> Relay_sur
         
-         # create temporal kernels
-        Wg_t = tpl.create_biphasic_ft(phase_duration =42.5*pq.ms, damping_factor =0.38, delay =0 *pq.ms) # param. values from Norheim, Wyller, Einevoll                                       # Stimnuli -> Ganglion
-        Krg_t = tpl.create_exp_decay_ft(1 *pq.ms, delay = 0 *pq.ms)              # Ganglion      -> Relay
-        Kcr_t = tpl.create_delta_ft()                                            # Relay         -> Cortical_cen_sur
-        Krcr_cen_t = tpl.create_exp_decay_ft(1 *pq.ms, delay = 0 *pq.ms)         # Cortical_cen  -> Relay
-        Krcr_sur_t = tpl.create_exp_decay_ft(1 *pq.ms, delay = 0 *pq.ms)         # Cortical_sur  -> Relay
-        
+        # create temporal kernel
+        delta_t = tpl.create_delta_ft()
+
         # create neurons                               (Wg_s, delta_t)
-        ganglion = network.create_ganglion_cell(kernel=(Wg_s, Wg_t))
+        ganglion = network.create_ganglion_cell(kernel=(Wg_s, delta_t))
         relay = network.create_relay_cell()
         cortical_cen = network.create_cortical_cell()
         cortical_sur = network.create_cortical_cell()
         
         # connect neurons
-        network.connect(ganglion, relay, (Krg_s, Krg_t), 1.0)                    # Ganglion      -> Relay
-        network.connect(cortical_cen, relay, (Krcr_cen_s, Krcr_cen_t), 0.1)      # Cortical_cen  -> Relay
-        network.connect(cortical_sur, relay, (Krcr_sur_s, Krcr_sur_t), 0.1)      # Cortical_sur  -> Relay
-        network.connect(relay, cortical_cen, (Kcr_s, Kcr_t), 1.0)                # Relay         -> Cortical_cen
-        network.connect(relay, cortical_sur, (Kcr_s, Kcr_t), 1.0)                # Relay         -> Cortical_sur
+        network.connect(ganglion, relay, (Krg_s, delta_t), 1.0)                    # Ganglion      -> Relay
+        network.connect(cortical_cen, relay, (Krcr_cen_s, delta_t), 0.1)      # Cortical_cen  -> Relay
+        network.connect(cortical_sur, relay, (Krcr_sur_s, delta_t), -0.1)      # Cortical_sur  -> Relay
+        network.connect(relay, cortical_cen, (Kcr_s, delta_t), 1.0)                # Relay         -> Cortical_cen
+        network.connect(relay, cortical_sur, (Kcr_s, delta_t), 1.0)                # Relay         -> Cortical_sur
         
 
         network.compute_irf(relay)

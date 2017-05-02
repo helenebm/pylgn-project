@@ -20,7 +20,7 @@ for i, b_rc in enumerate(b_rcr_vec):
         network = pylgn.Network()
 
         # create integrator
-        integrator = network.create_integrator(nt=1, nr=7, dt=1*pq.ms, dr=0.1*pq.deg)
+        integrator = network.create_integrator(nt=1, nr=7, dt=1*pq.ms, dr=1*pq.deg)
         
         # create spatial kernels
         Wg_s = spl.create_dog_ft(A=1, a=0.62*pq.deg, B=0.85, b=1.26*pq.deg)      # Stimuli   -> Ganglion, (edog-paper)
@@ -40,8 +40,8 @@ for i, b_rc in enumerate(b_rcr_vec):
         
         # connect neurons
         network.connect(ganglion, relay, (Krg_s, delta_t), 1.0)                    # Ganglion      -> Relay
-        network.connect(cortical_cen, relay, (Krcr_cen_s, delta_t), 0.1)      # Cortical_cen  -> Relay
-        network.connect(cortical_sur, relay, (Krcr_sur_s, delta_t), -0.1)      # Cortical_sur  -> Relay
+        network.connect(cortical_cen, relay, (Krcr_cen_s, delta_t), 0.5)      # Cortical_cen  -> Relay
+        network.connect(cortical_sur, relay, (Krcr_sur_s, delta_t), -0.5)      # Cortical_sur  -> Relay
         network.connect(relay, cortical_cen, (Kcr_s, delta_t), 1.0)                # Relay         -> Cortical_cen
         network.connect(relay, cortical_sur, (Kcr_s, delta_t), 1.0)                # Relay         -> Cortical_sur
         

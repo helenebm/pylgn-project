@@ -21,7 +21,7 @@ for w_c in fb_weights:
     network = pylgn.Network()
 
     # create integrator
-    integrator = network.create_integrator(nt=10, nr=7, dt=1*pq.ms, dr=10*pq.deg)
+    integrator = network.create_integrator(nt=10, nr=7, dt=1*pq.ms, dr=1*pq.deg)
     
     # create spatial kernels
     Wg_s = spl.create_dog_ft(A=1, a=0.62*pq.deg, B=0.85, b=1.26*pq.deg)      # Stimuli   -> Ganglion, (edog-paper)

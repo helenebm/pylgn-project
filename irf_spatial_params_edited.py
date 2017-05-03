@@ -26,8 +26,8 @@ for i, b_rc in enumerate(b_rcr_vec):
         Wg_s = spl.create_dog_ft(A=1, a=0.62*pq.deg, B=0.85, b=1.26*pq.deg)      # Stimuli   -> Ganglion, (edog-paper)
         Krg_s = spl.create_gauss_ft(A=1, a=0.1*pq.deg)                           # Gangllion -> Relay     (honda-paper)
         Kcr_s = spl.create_delta_ft()                                            # Relay     -> Cortical_cen_sur 
-        Krcr_cen_s = spl.create_gauss_ft(A=1, a=(a_rc))                          # Cortical  -> Relay_cen
-        Krcr_sur_s = spl.create_gauss_ft(A=2, a=(b_rc))                          # Cortical  -> Relay_sur
+        Krcr_cen_s = spl.create_gauss_ft(A=2, a=(a_rc))                          # Cortical  -> Relay_cen
+        Krcr_sur_s = spl.create_gauss_ft(A=1, a=(b_rc))                          # Cortical  -> Relay_sur
         
         # create temporal kernel
         delta_t = tpl.create_delta_ft()

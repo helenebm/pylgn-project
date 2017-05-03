@@ -27,8 +27,8 @@ for w_c in fb_weights:
     Wg_s = spl.create_dog_ft(A=1, a=0.62*pq.deg, B=0.85, b=1.26*pq.deg)      # Stimuli   -> Ganglion, (edog-paper)
     Krg_s = spl.create_gauss_ft(A=1, a=0.1*pq.deg)                           # Gangllion -> Relay     (honda-paper)
     Kcr_s = spl.create_delta_ft()                                            # Relay     -> Cortical_cen_sur 
-    Krcr_cen_s = spl.create_gauss_ft(A=1, a=(0.1)*pq.deg)                    # Cortical  -> Relay_cen
-    Krcr_sur_s = spl.create_gauss_ft(A=2, a=(0.9)*pq.deg)                    # Cortical  -> Relay_sur
+    Krcr_cen_s = spl.create_gauss_ft(A=2, a=(0.1)*pq.deg)                    # Cortical  -> Relay_cen
+    Krcr_sur_s = spl.create_gauss_ft(A=1, a=(0.9)*pq.deg)                    # Cortical  -> Relay_sur
     
     # create temporal kernels
     Wg_t = tpl.create_biphasic_ft(phase_duration =42.5*pq.ms, damping_factor =0.38, delay =0 *pq.ms) # param. values from Norheim, Wyller, Einevoll                                       # Stimnuli -> Ganglion

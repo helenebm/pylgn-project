@@ -55,7 +55,7 @@ for w_fb in fb_weights:
     for i, d in enumerate(mask_size):
         # create stimulus
         k_pg = integrator.spatial_freqs[1]  # =0.49 1/deg. Set to 0 for flashing spot                         
-        w_pg = integrator.temporal_freqs[1] # =8.12 Hz.    Set to 0 for static stimuli
+        w_pg = integrator.temporal_freqs[1] # =6.14 Hz.    Set to 0 for static stimuli
         stimulus = pylgn.stimulus.create_patch_grating_ft(wavenumber=k_pg,
                                                           angular_freq=w_pg,
                                                           mask_size=d)

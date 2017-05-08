@@ -9,8 +9,8 @@ import pylgn.kernels.temporal as tpl
 center_excit_norm = 0.637718
 surround_inhib_norm = 0.0483276
 
-a_rcr_vec = np.linspace(0.1, 3.0, 10) * pq.deg
-b_rcr_vec = np.linspace(0.1, 3.0, 10) * pq.deg
+a_rcr_vec = np.linspace(0.1, 3.0, 30) * pq.deg
+b_rcr_vec = np.linspace(0.1, 3.0, 30) * pq.deg
 
 center_excit = np.zeros([len(b_rcr_vec), len(a_rcr_vec)])
 surround_inhib = np.zeros([len(b_rcr_vec), len(a_rcr_vec)])

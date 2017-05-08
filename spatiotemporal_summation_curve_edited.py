@@ -54,8 +54,8 @@ for w_fb in fb_weights:
     st_summation_curve = np.zeros([len(mask_size), integrator.Nt]) / pq.s
     for i, d in enumerate(mask_size):
         # create stimulus
-        k_pg = integrator.spatial_freqs[3]  # 0 for flashing spot                         
-        w_pg = integrator.temporal_freqs[1] # 0 for static stimuli
+        k_pg = integrator.spatial_freqs[1]  # =0.49 1/deg. Set to 0 for flashing spot                         
+        w_pg = integrator.temporal_freqs[1] # =8.12 Hz.    Set to 0 for static stimuli
         stimulus = pylgn.stimulus.create_patch_grating_ft(wavenumber=k_pg,
                                                           angular_freq=w_pg,
                                                           mask_size=d)
